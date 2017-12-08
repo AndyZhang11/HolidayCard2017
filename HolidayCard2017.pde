@@ -1,45 +1,22 @@
-
-Snow [] s;
-void setup() {
-  size(800, 400);
-  s=new Snow[100];
-  for (int i=0; i<s.length; i++) {
-    s[i]= new Snow();
-  }
-}
-
-void draw() {
-  background(0);
-  for (int i=0; i<s.length; i++) {
-    s[i].addPhysics();
-    s[i].snow();
-  }
-}
-
-
 class Snow {
-  float acceleration;
-  //float velocity=.2;
-  float velocity=(float)Math.random();
-  float xlocation;
-  float ylocation;
-  float xloc=(float)Math.random();
-  float yloc;
-  float s=(float)Math.random()*20;
-  float [] f;
-  Snow() {
-    //xlocation=(float)Math.random()*width;
-    xlocation=random(-4, width);
-    ylocation=0;
+  float snowY=random(-300,-10);
+  float snowX=random(width);
+  float snowYSpeed=random(1,5);
+
+  void show(){
+  ellipse(snowX,snowY,5,5);
   }
-  void addPhysics() {
-    yloc=acceleration+velocity;
+
+  void fall(){
+  snowY+=snowYSpeed;
+  if(snowY>height+10){
+    snowX=random(width);
+    snowY=random(-300,-10);
+    snowYSpeed=random(1,5);
   }
-  void snow() {
-    fill(255, 255, 255);
-    ellipse(xlocation+=xloc, ylocation+=yloc, s, s);
-    if (ylocation>height) {
-      ylocation=0;
-    }
+  }
+
+  void shake(){
+  snowX+=random(-3,3);
   }
 }
